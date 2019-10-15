@@ -1,0 +1,61 @@
+import java.text.SimpleDateFormat
+
+plugins {
+	// foundational plugin. Gradle can work with many different languages
+	id 'java'
+	// Spring plugins to setup Spring Boot and dependency mangagement
+	id 'org.springframework.boot' version '2.1.8.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	// jib is used for creating containers without needing to install Docker
+	id 'com.google.cloud.tools.jib' version '1.6.1'
+	// Separate source sets for unit, integration and acceptance tests
+	id 'org.unbroken-dome.test-sets' version '2.2.1'
+	// Analyze This!
+	id 'org.sonarqube' version '2.7'
+	// Flyway handles managing database artifacts: Do we actually need the plugin? start.spring.io doesnt include it when initializing a project
+//	id 'org.flywaydb.flyway' version '6.0.6'
+}
+
+group = 'com.idexx.lims'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Database dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// Test only dependencies
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+jib {
+	from {
+		image = 'openjdk:12-alpine'
+	}
+	to {
+		image = "us.gcr.io/gdos-mdonahue-sb/cdlunchandlearn:${new SimpleDateFormat('DHms').format(new Date())}"
+	}
+}
+
+testSets {
+	integrationTest
+}
+
+// Flyway
+//flyway {
+//	url = ''
+//	user = ''
+//}
+
+// Tells gradle to download the version of the runtime that contains full sources. Helps your IDE with code completion
+wrapper {
+	distributionType = Wrapper.DistributionType.ALL
+}

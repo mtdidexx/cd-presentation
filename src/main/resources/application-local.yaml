@@ -1,0 +1,9 @@
+# custom properties for the application
+foobar: Foliage
+
+# data properties
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${GDOS_TEST_DB_PORT:5432}/cdlunchandlearn
+    data-username: lnl
+    data-password: ${GDOS_DB_PW}

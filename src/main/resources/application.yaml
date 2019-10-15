@@ -1,0 +1,13 @@
+foobar: DOLEMITE
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false # Fix for HHH000424 error
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: false
