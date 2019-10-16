@@ -12,8 +12,6 @@ plugins {
 	id 'org.unbroken-dome.test-sets' version '2.2.1'
 	// Analyze This!
 	id 'org.sonarqube' version '2.7'
-	// Flyway handles managing database artifacts: Do we actually need the plugin? start.spring.io doesnt include it when initializing a project
-//	id 'org.flywaydb.flyway' version '6.0.6'
 }
 
 group = 'com.idexx.lims'
@@ -48,12 +46,6 @@ jib {
 testSets {
 	integrationTest
 }
-
-// Flyway
-//flyway {
-//	url = ''
-//	user = ''
-//}
 
 // Tells gradle to download the version of the runtime that contains full sources. Helps your IDE with code completion
 wrapper {
