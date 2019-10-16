@@ -1,6 +1,6 @@
 format_version: 4
 common:
-  groupName: &groupName lunch-and-learn
+  groupName: &groupName ci-cd-lunch-and-learn
 environments:
   pre-prod:
     pipelines:
@@ -8,7 +8,7 @@ environments:
 pipelines:
   cd-presentation-integrate:
     group: *groupName
-    display_order: 1
+    display_order: 5
     materials:
       github-cd-presentation:
         git: git@github.com:mtdidexx/cd-presentation.git
